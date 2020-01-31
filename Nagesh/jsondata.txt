@@ -1,0 +1,289 @@
+[  
+   {  
+      "text":"foo",
+      "value":1
+   },
+   {  
+      "text":"bar",
+      "value":2
+   },
+   {  
+      "text":"baz",
+      "value":3
+   }
+]
+
+
+<%@page session="false" import="
+                  org.apache.sling.api.resource.Resource,
+                  org.apache.sling.api.resource.ResourceUtil,
+                  org.apache.sling.api.resource.ValueMap,
+                  org.apache.sling.api.resource.ResourceResolver,
+                  org.apache.sling.api.resource.ResourceMetadata,
+                  org.apache.sling.api.wrappers.ValueMapDecorator,
+				  org.json.simple.parser.JSONParser,
+                  java.util.List,
+                  java.util.ArrayList,
+                  java.util.HashMap,
+				  java.util.Iterator,
+                  java.util.Locale,
+				  java.io.InputStream,
+				  java.io.InputStreamReader,
+				  javax.jcr.Node,
+                  com.adobe.granite.ui.components.ds.DataSource,
+                  com.adobe.granite.ui.components.ds.EmptyDataSource,
+                  com.adobe.granite.ui.components.ds.SimpleDataSource,
+                  com.adobe.granite.ui.components.ds.ValueMapResource,
+                  com.day.cq.wcm.api.Page,
+                  com.day.cq.wcm.api.PageManager"%><%
+%><%@taglib prefix="cq" uri="http://www.day.com/taglibs/cq/1.0" %><%
+%><cq:defineObjects/><%
+  
+	request.setAttribute(DataSource.class.getName(), EmptyDataSource.instance());
+	ResourceResolver resolver = resource.getResourceResolver();
+
+	
+
+	
+
+	//ArrayList to hold data
+	List<Resource> resourceList = new ArrayList<Resource>();
+
+	JSONParser jsonParser = new JSONParser();
+Resource jsonResource = resourceResolver.getResource("/content/dam/jsondata.txt/jcr:content/renditions/original/jcr:content");
+	InputStream stream = null;
+
+	if(jsonResource != null){
+        try {
+            stream = jsonResource.adaptTo(Node.class).getProperty("jcr:data").getBinary().getStream();
+            org.json.simple.JSONArray jsonArray =  (org.json.simple.JSONArray) jsonParser.parse(new InputStreamReader(stream));
+            out.println("jsonArray"+jsonArray);
+            Iterator<org.json.simple.JSONObject> jsonObjectIterator = jsonArray.iterator();
+            while(jsonObjectIterator.hasNext()){
+                out.println("hai");
+                org.json.simple.JSONObject eachJsonObject = jsonObjectIterator.next();
+    
+                //Specify the value and text values
+                Long value = (Long)eachJsonObject.get("value");
+                String text = (String)eachJsonObject.get("text") ;
+                out.println("value"+value);
+    
+                //populate the map
+                ValueMap vm = new ValueMapDecorator(new HashMap<String, Object>());
+                vm.put("value",value);
+                vm.put("text",text);
+                
+                resourceList.add(new ValueMapResource(resolver, new ResourceMetadata(), "nt:unstructured", vm));
+    
+            }
+
+        } catch (Exception e) {
+            out.println(e.getMessage());
+        } finally {
+            if (stream != null) {
+				stream.close();
+            }
+        }
+	}
+  
+	//Create a DataSource that is used to populate the drop-down control
+	DataSource ds = new SimpleDataSource(resourceList.iterator());
+	request.setAttribute(DataSource.class.getName(), ds);
+ 
+%>
+
+-------------------------------------------------
+
+
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.InvalidItemStateException;
+import javax.jcr.ItemExistsException;
+import javax.jcr.Node;
+import javax.jcr.ReferentialIntegrityException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.version.VersionException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Properties;
+import org.apache.felix.scr.annotations.Property;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.adobe.granite.workflow.WorkflowException;
+import com.adobe.granite.workflow.WorkflowSession;
+import com.adobe.granite.workflow.exec.WorkItem;
+import com.adobe.granite.workflow.exec.WorkflowProcess;
+import com.adobe.granite.workflow.metadata.MetaDataMap;
+import com.cisco.wem.framework.util.FrameworkConstants;
+
+import org.apache.sling.api.resource.LoginException;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ResourceResolverFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.osgi.service.cm.Configuration;
+import org.osgi.service.cm.ConfigurationAdmin;
+import org.osgi.service.component.ComponentContext;
+
+@Component(name = "com.cisco.wcm.workflow.AddPagePropertiesWorkflow", specVersion = "1.1", metatype = false)
+@Service
+@Properties({ @Property(name = "process.label", value = "Add Page Properties"),
+		@Property(name = "service.pid", value = "com.cisco.wcm.workflow.AddPagePropertiesWorkflow") })
+public class AddPagePropertiesWorkflow implements WorkflowProcess {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(AddPagePropertiesWorkflow.class);
+	@Reference
+	private ResourceResolverFactory resolverFactory;
+	public void execute(WorkItem workItem, WorkflowSession workflowSession, MetaDataMap args) throws WorkflowException {
+		// TODO Auto-generated method stub
+		String payLoadPath = workItem.getWorkflowData().getPayload().toString();
+		
+		if (StringUtils.isNotBlank(payLoadPath)) {
+			Map<String, Object> param = new HashMap<String, Object>();
+
+			// works for 6.3 
+	        param.put(ResourceResolverFactory.SUBSERVICE, FrameworkConstants.DEFAULT_WORKSPACE);
+	        try {
+	        	Session session = workflowSession.adaptTo(Session.class);
+				//ResourceResolver resourceResolver = resolverFactory.getServiceResourceResolver(param);
+				//ResourceResolver resourceResolver = getResourceResolver(session, resolverFactory);
+				//Resource resource = resourceResolver.getResource(payLoadPath);
+				JSONObject jsonResponse = getResponse("https://jsonplaceholder.typicode.com/todos/1");
+				if (null != jsonResponse) {
+					addProperties(session, payLoadPath, jsonResponse);
+				}
+			} catch (Exception e) {
+				LOGGER.error("Loggin Exception occured", e);
+			}
+		}
+	}
+	
+	public static JSONObject getResponse(String serviceUrl) throws JSONException {
+		JSONObject jsonResponse =new JSONObject();
+		LOGGER.debug("inside getResponse method");
+		try {
+
+			//URL url = new URL("https://jsonplaceholder.typicode.com/todos/1");
+			URL url = new URL(serviceUrl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Accept", "application/json");
+
+			if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ conn.getResponseCode());
+			}
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+				(conn.getInputStream())));
+
+			String output;
+			StringBuilder sb = new StringBuilder();
+			System.out.println("Output from Server .... \n");
+			while ((output = br.readLine()) != null) {
+				sb.append(output);
+				System.out.println(output);
+			}
+
+			conn.disconnect();
+			
+			jsonResponse = new JSONObject(sb.toString());
+
+		  } catch (MalformedURLException e) {
+
+			  LOGGER.error("MalformedURLException", e);
+
+		  } catch (IOException e) {
+
+			  LOGGER.error("IOException", e);
+
+		  }
+		return jsonResponse;
+
+		}
+	
+	public void addProperties(Session session, String pagePath, JSONObject jsonResponse) {
+		LOGGER.debug("inside addProperties method");
+		try {
+			String pageJcrContentPath = pagePath + "/jcr:content";
+			LOGGER.debug("pageJcrContentPath {}", pageJcrContentPath);
+			if (session.itemExists(pageJcrContentPath)) {
+				Node pageJcrContentNode = session.getNode(pageJcrContentPath);
+				Iterator<String> keys = jsonResponse.keys();
+				while (keys.hasNext()) {
+					String propertyName = keys.next();
+					LOGGER.debug("propertyName {}", propertyName);
+					Object propertyValue = jsonResponse.get(propertyName);
+					if (propertyValue instanceof String) {
+						pageJcrContentNode.setProperty(propertyName, (String)propertyValue);
+					}
+					else if (propertyValue instanceof Long) {
+						pageJcrContentNode.setProperty(propertyName, (Long)propertyValue);
+					}
+					else if (propertyValue instanceof Boolean) {
+						pageJcrContentNode.setProperty(propertyName, (Boolean)propertyValue);
+					}
+					session.save();
+				}
+			}
+		} catch (Exception e) {
+			try {
+				session.save();
+			} catch (Exception e1) {
+				LOGGER.error("Exception", e);
+			}
+			LOGGER.error("Exception occured while adding page properties", e);
+		}
+	}
+	
+	public ResourceResolver getResourceResolver(Session session, ResourceResolverFactory resourceResolverFactory)
+			throws LoginException {
+		LOGGER.debug("Entering getResourceResolver method");
+
+		long startTime = System.currentTimeMillis();
+		ResourceResolver resourceResolver = null;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("user.jcr.session", session);
+		resourceResolver = resourceResolverFactory.getResourceResolver(map);
+		long endTime = System.currentTimeMillis();
+		LOGGER.info("Time Taken in the getResourceResolver() method : " + (endTime - startTime) / 1000 + " Seconds");
+		if (resourceResolver != null) {
+			LOGGER.debug("Exiting getResourceResolver method");
+			return resourceResolver;
+		} else {
+			LOGGER.debug("Exiting getResourceResolver method reourceResolver is null");
+			return null;
+		}
+		//import org.osgi.service.cm.Configuration;
+		//import org.osgi.service.cm.ConfigurationAdmin;
+		//@Reference
+		//ConfigurationAdmin configAdmin;
+		//Configuration conf = configAdmin.getConfiguration("")
+		//protected void activate(ComponentContext context) throws Exception {
+		//Dictionary<String, Object> properties = context.getProperties();
+
+	}
+ 
+}
