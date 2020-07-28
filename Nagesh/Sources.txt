@@ -1,0 +1,18 @@
+AEM communities channel
+
+https://www.youtube.com/channel/UCDtISU9W-zzo1PIU3pGHUbA/videos
+
+
+Sling Dynamic Include (for enabling few components not to cache)
+
+https://helpx.adobe.com/experience-manager/kt/index/aem-6-3-videos.html
+https://helpx.adobe.com/experience-manager/kt/platform-repository/using/sling-dynamic-include-technical-video-setup.html
+
+Dispatcher
+
+http://aeminterviewquestions.com/dispatcher.html
+https://forums.adobe.com/thread/2323290
+https://www.youtube.com/watch?v=4LPivkoJgMI&list=PLcucBDfqsaV1gknUBQxhlqWg4LfiIj3SN
+https://www.youtube.com/watch?v=1QnwiT57HiE
+https://www.youtube.com/watch?v=dng4CeGOqaw
+https://docs.adobe.com/content/help/en/experience-manager-dispatcher/using/configuring/configuring-dispatcher-to-prevent-csrf.html
