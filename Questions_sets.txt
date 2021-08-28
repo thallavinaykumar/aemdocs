@@ -1,0 +1,117 @@
+--------- Set 1 ---------
+
+1. 	How can I enhance sling model use by 000 image component in our project
+2. 	How render youtube video in aem component
+3. 	How to send notification to country respective user means for English, French, German.
+4. 	Initial content and structure in editable template
+5. 	Add header in experience template
+6. 	How load balancer works
+7. 	How to set limit in aem service to improve performance
+8. 	How syncronize other publishers in aem
+9. 	Proxy component in AEM
+10. How to user sling dynamic include
+
+
+--------- Set 2 -----------
+
+1. 	How we can add same tab with common filed for all 10 component 
+2. 	Why resource type registration for serlet is best than path
+3. 	How to add inplace editor for text component in our project
+4. 	How to call sly-template
+5. 	Difference between sly repeat - sly list
+6. 	How to call one HTML wrapper in aem component using sightly
+7. 	How to pass parameter in sightly
+8. 	Custom workflow implementation
+9. 	How to execute some business login for bundle startup process
+10. MSM
+11. List of replication agents available in AEM
+12. How to use core components in our project
+13. Core component changes with versions
+14. Editable template with component adding concept
+15. Steps to create editable template
+16. Can we customize template type
+17. If add text component in template using responsive grid
+18. What is the use of lock or unlock template component
+19. Can I edit text component of the page template is editable
+20. What is use of sly-attribute
+21. How cache page in dispatcher
+22. Why use sling model and not wcmuse pojo
+23. How to call third party service in sling model
+24. Can we rename init() in sling model
+25. Can we call one component from other
+26. Why JCR use
+27. Difference between nt:unstructured or structure node
+28. Bundle versioning
+29. How database work in aem
+30. Is that DB is structured or unstructured
+31. POM ffro AEM
+32. How add SPA in AEM project
+
+------------ Set 3 --------
+
+1. 	New features in AEM 6.5
+2. 	Dispatcher configuration for caching secure pages
+3. 	AEM clustering / Maintaing user generated content
+4. 	Querying / Indexes
+5. 	Content updates across a large number of pages (Groovy)
+6. 	Transfering huge content between AEM servers that are on different networks
+7. 	SAML / LDAP integration for SSO
+8. 	Custom workflow where all the users in a group have to approve for the workflow to complete
+9. 	What happens or what exception is thrown when two threads/services try to write a single node?
+10. Allow caching of URLs with query parameters in dispatcher
+11. What is APache http server and how does it work / Flags in APache
+12. Comparator / Comparable. Employee/Address ... sort based on name. If two employees have same name then sort bases on address.
+13. Types of Exceptions you can get while accessing a node.
+14. Sling Dynamic Include / How to improve performance of a page which has only one dynamic section in it.
+15. Issues faced during migration.
+16. Any tools that are used for migration ?  How to identify deprecated APIs
+17. Difference between Event Listener and Event handler
+18. Difference between regular servlet and sling servlet
+19. Difference between java servlet container and OSGI servlet container
+20. Steps for setting up production level AEM server
+21. Statfile
+22. TIme based cache invalidation in dispatcher
+23. How would you implment the sitemap feature
+24. How does AEM handle Authentication
+25. Migration process from lower version to higher version
+26. Let's say during a migration, you created a whole new set of components to re-create an existing site for a client. After the new components are developed,
+	client asks for re-using some of the static pages from their old site (which is using a old set of components).Provide a solution to migrate the 
+	old static pages content to use the new components
+27. If there are multiple implementations of a service, how will you choose a particular implementation when you are injecting that service elsewhere
+
+
+------------- Set 4 ------------
+
+1. 	Multi Site Management - Experience Fragments
+	
+	Scenario - I have a site in multiple languages say English, French and German. I'm using blueprint/livecopy to sync/roll out the content from the 
+	master (English) to other languages. If I'm using an experience fragment in one of the pages, will the URls/links in the content of the experience
+	fragment will be updated to use the appropriate language paths/links or will they still refer ot the master language? If they want the links in the 
+	Experience fragment to be updated based on the language page it is present in, how can I achieve this?
+	
+2.	Touch UI dialog - fields validation
+
+	Scenario - I have a component and it has a touch ui dialog. I have two date fields in the dialog. Say "From" date and "To" date. I want to validate the 
+	dates entered in these fields and want to display an error message when the validation fails.
+	
+	Validation requirements - From date should be >=today and < To date. TO date shoul dbe >=today and > From date.
+	
+3. Query Builder
+
+	Scenario - I have a set of pages under "/content/abc". In some of these pages, I have a "Offer" component, with a property "offerType". (Assume that
+	no other copmonents has offterTye property)
+	
+	Write a query to search the pages
+	a. That have the offer component with property "offerType" value as "christmas"
+	b. That are last replicated after certain date
+	c. Sort the pages such that newly activated pages are top of the list
+	
+4. 	Write java code to search for the list of pages for the above query., by iterating thhrough all the pages using JCR or slign or any other AEM APIs.	
+	Dont user query bulder or any other query language.
+	
+5. 	How to sort an array list of objects
+6. 	How to configure SSO using the OOTB SAML authentication handler
+7. 	How to create templates and use them in sightly
+8. 	Angular
+	Scenario - I have component A and component B. Component A is the parent and component is the child inside. I want to update scome text in component B
+	whenever the value of a dropdown in component A is changed. How to achieve this.

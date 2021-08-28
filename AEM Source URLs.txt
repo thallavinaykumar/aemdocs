@@ -1,0 +1,205 @@
+Workflow
+
+https://www.youtube.com/watch?v=eUuObexK8Lw
+
+
+Jenkins setup
+
+https://labs.tadigital.com/index.php/2017/11/29/build-automation-and-deployment-of-aem-using-jenkins/
+
+
+AEM All
+
+https://www.aemtutorial.info/
+
+AEM - Good
+
+https://experiencemanaged.com/
+
+
+Customize AEM console
+
+https://experiencemanaged.com/posts/how-to-create-an-aem-62-admin-console-for-touch-ui.html
+
+Touch UI icon reference
+
+https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/reference-materials/coral-ui/coralui3/Coral.Icon.html
+
+Targetting
+
+https://www.youtube.com/watch?v=6m5Cqd66UYI&list=LLmDgFU6JRRqoeqiLdiey5mw
+
+
+Bar rating using jquery plugin
+
+https://antennaio.github.io/jquery-bar-rating/
+
+
+Sling Model Exporter
+
+https://docs.adobe.com/content/help/en/experience-manager-learn/foundation/development/develop-sling-model-exporter.html
+
+
+AEM - Developer guide
+
+https://aem.redquark.org/
+
+AEM interview questions
+
+http://aeminterviewquestions.com/clientlibs.html
+
+Dispatcher Setup
+
+https://www.aemquickstart.in/2015/11/dispatcher-configuration-in-adobe-aem.html
+
+Download Assets 
+
+https://helpx.adobe.com/experience-manager/using/aem64_download_dam_assets.html
+
+Bookmarks
+
+file:///C:/Users/vthalla/Documents/MyJabberFiles/hkesani@cisco.com/bookmarks_10_30_19.html
+
+JQUERY UI
+
+https://jqueryui.com/draggable/
+
+
+https://medium.com/adobetech/using-the-osgi-declarative-service-in-aem-6-4-21102f649d54
+
+Sling servlet and Declarative annotations
+
+http://www.nateyolles.com/blog/2017/05/osgi-declarative-services-annotations-in-aem
+
+
+
+Sightly
+
+https://docs.adobe.com/content/help/en/experience-manager-htl/using/htl/block-statements.html#resource
+
+Convert a node to json
+
+https://www.codermag.net/2016/04/how-to-convert-aem-node-into-json-using.html
+
+Ignore properties while converting node to json
+
+http://myadobecq.blogspot.com/2016/10/aem-node-to-json-converter-logic.html
+
+Vanity URL
+
+https://www.youtube.com/watch?v=JgKkGZxXsrs
+
+
+
+
+
+https://hashimkhan.in/aem-adobecq5-interview-questions/developers/
+
+
+Social Media
+
+https://docs.adobe.com/content/help/en/experience-manager-learn/sites/developing/social-media-sharing-technical-video-use.html
+
+Content fragments
+
+https://www.youtube.com/watch?v=TRBYvbJAuxQ
+
+https://docs.adobe.com/content/help/en/experience-manager-learn/sites/content-fragments/content-fragments-feature-video-use.html
+
+
+
+Developer guide
+
+https://aem.redquark.org/2018/10/day-11-client-libraries-in-action.html
+
+Nested MultiField
+
+https://levelup.gitconnected.com/aem-how-to-use-nested-multifields-in-your-components-using-a-sling-model-vs-pure-htl-92ff8d036ba1
+
+Finding Content Without a Tag With AEM Query Builder
+
+https://blogs.perficient.com/2020/04/20/finding-content-without-a-tag-with-aem-query-builder/
+
+
+AEM: Fixing RTE Source Edit Plugin Error While Submitting RTE Dialog
+
+https://blogs.perficient.com/2019/10/22/aem-fixing-rte-source-edit-plugin-error-while-submitting-rte-dialog/
+
+
+
+Simple Markdown Documentation For Your AEM Components
+
+https://blogs.perficient.com/2019/03/27/simple-markdown-documentation-for-your-aem-components/
+
+
+Dynamic dropdowns in aem content fragments
+
+https://blogs.perficient.com/2019/09/06/dynamic-dropdowns-in-aem-content-fragments/
+
+
+Show hide Touch UI
+
+http://aemcases.blogspot.com/2018/05/touch-ui-hideshow-fields-in-dialog-in.html
+
+
+Page Generator
+
+https://adobe-consulting-services.github.io/acs-aem-tools/features/test-page-generator/index.html
+
+
+Event Handlign
+
+https://blogs.adobe.com/experiencedelivers/experience-management/event_handling_incq/
+https://cqdump.wordpress.com/2012/11/13/cq-coding-patterns-sling-vs-jcr-part-2/
+
+Internalization
+
+http://aemcases.blogspot.com/2018/05/internationalization-i18n-in-aem-using.html
+
+
+OSGI Configuration
+
+http://aemcases.blogspot.com/2018/05/osgi-service-configuration-and-its.html
+
+
+Infinity json bookmark
+
+http://aemcases.blogspot.com/2019/09/open-infinityjson-of-your-aem-page-with.html
+
+
+Generate HTML markup
+
+http://aemcases.blogspot.com/2020/01/a-servlet-to-output-html-markup.html
+
+Dispatcher 
+
+https://www.youtube.com/watch?v=1QnwiT57HiE
+
+
+What is OSGI?
+
+https://myprogressivelearning.wordpress.com/2014/09/16/what-is-osgi/
+
+Component vs service
+
+https://myprogressivelearning.wordpress.com/2016/03/07/osgi-component-vs-service/
+
+What is bundle in OSGI framework?
+
+https://myprogressivelearning.wordpress.com/2014/09/23/what-is-a-bundle-in-osgi-framework/
+
+
+Sling dynamic include
+
+https://docs.adobe.com/content/help/en/experience-manager-learn/foundation/development/set-up-sling-dynamic-include.html
+
+
+AEM - Trigger customized workflow on manage publication
+https://bimmisoi.blogspot.com/2020/07/aem-trigger-customized-workflow-on.html
+
+AEM - Restrict DAM Asset Activation to Publish Instance
+https://bimmisoi.blogspot.com/2020/06/aem-restrict-dam-asset-activation-to.html
+
+
+Account Management 
+https://rmengji.wordpress.com/2016/10/11/aem-6-2-account-management-service/
